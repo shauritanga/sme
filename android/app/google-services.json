@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "383934044020",
+    "project_id": "traders-a32eb",
+    "storage_bucket": "traders-a32eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383934044020:android:2833a94d0bea2e0beffe21",
+        "android_client_info": {
+          "package_name": "com.example.sme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx0eP_DlqxrdeY9lbGqlbE0YxvKu3HjgA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
