@@ -6,12 +6,12 @@ class AppColors {
   static final dartkgrey = HexColor('#4C7380');
   static final lightgrey = HexColor('#D8E4E8');
   static final morelightgrey = HexColor('#E4ECEF');
-  static final black = Colors.black;
-  static final black54 = Colors.black54;
-  static final white = Colors.white;
-  static final transparent = Colors.transparent;
-  static final orange = Colors.orange;
-  static final grey = Colors.grey;
+  static const black = Colors.black;
+  static const black54 = Colors.black54;
+  static const white = Colors.white;
+  static const transparent = Colors.transparent;
+  static const orange = Colors.orange;
+  static const grey = Colors.grey;
   static final grey100 = HexColor('#F0F0F1');
   static final svgColor = HexColor('#707070');
   static final textColorGrey = HexColor('#9F9FAD');
@@ -25,16 +25,16 @@ class AppColors {
   static final primary = HexColor('#102d61');
 }
 
-final orange = Colors.orange;
+const orange = Colors.orange;
 final bgGrey = HexColor('#f6f6f6');
-final black = Colors.black;
-final black54 = Colors.black54;
-final black87 = Colors.black87;
-final white = Colors.white;
-final white54 = Colors.white54;
-final green = Colors.green;
-final transparent = Colors.transparent;
-final grey = Colors.grey;
-final red = Colors.red;
+const black = Colors.black;
+const black54 = Colors.black54;
+const black87 = Colors.black87;
+const white = Colors.white;
+const white54 = Colors.white54;
+const green = Colors.green;
+const transparent = Colors.transparent;
+const grey = Colors.grey;
+const red = Colors.red;
 
-final blue = Colors.blue;
+const blue = Colors.blue;

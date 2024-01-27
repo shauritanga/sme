@@ -51,12 +51,12 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PersistentTabController _controller =
+    PersistentTabController controller =
         PersistentTabController(initialIndex: 0);
 
     return PersistentTabView(
       context,
-      controller: _controller,
+      controller: controller,
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,

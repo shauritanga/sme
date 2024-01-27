@@ -91,15 +91,38 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     const SizedBox(height: 8),
                     TextFormField(
                       decoration: InputDecoration(
-                        hintText: "Enter your full name",
+                        hintText: "Enter your first and last name",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                         ),
                       ),
                       onSaved: (value) => name = value!,
                       validator: (value) {
+                        String pattern = r'^(?!.*([A-Za-z])\1{2})[A-Za-z\s]+$';
+
                         if (value!.isEmpty) {
-                          return "Please enter your name";
+                          return "Please enter your full name";
+                        }
+                        if (value.trim().split(" ").length < 2) {
+                          return "Please enter your full name";
+                        }
+                        if (value.trim().split(" ").length > 2) {
+                          return "Please only first and last names";
+                        }
+                        String firstName = value.trim().split(" ")[0];
+                        String lastName = value.trim().split(" ")[1];
+                        RegExp regExp = RegExp(pattern);
+                        if (firstName.length < 3) {
+                          return "Please enter valid first name";
+                        }
+                        if (lastName.length < 3) {
+                          return "Please enter valid last name";
+                        }
+                        if (!regExp.hasMatch(firstName)) {
+                          return "Please enter a valid first name";
+                        }
+                        if (!regExp.hasMatch(lastName)) {
+                          return "Please enter a valid first name";
                         }
                         return null;
                       },
@@ -117,10 +140,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         if (!snapshot.hasData) {
                           return const CircularProgressIndicator();
                         }
-
-                        // List<String> regions = snapshot.data!.docs
-                        //     .map((doc) => doc['name'].toString())
-                        //     .toList();
 
                         List<QueryDocumentSnapshot> regions =
                             snapshot.data!.docs;
@@ -226,10 +245,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           return Container();
                         }
 
-                        // List<String> wards = snapshot.data.docs
-                        //     .map((doc) => doc['name'].toString())
-                        //     .toList();
-
                         List<QueryDocumentSnapshot> wards = snapshot.data!.docs;
 
                         List<Map> katas = wards.map((kata) {
@@ -331,7 +346,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             r'^[a-z]+([a-z0-9.-]+)?\@[a-z]+\.[a-z]{2,3}$';
                         RegExp regExp = RegExp(pattern);
                         if (value!.isEmpty) {
-                          return "Email is required";
+                          return "Please enter your email";
                         }
                         if (!regExp.hasMatch(value)) {
                           return "Please enter a valid email";
@@ -355,6 +370,13 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       ),
                       onSaved: (value) => phone = value!,
                       validator: (value) {
+                        String pattern = r'^[+255|0]+[6|7][1-9]{8}$';
+                        RegExp regExp = RegExp(pattern);
+                        if (value!.isEmpty) {
+                          return "Please enter your phone number";
+                        } else if (!regExp.hasMatch(value)) {
+                          return "Please enter a valid phhone number";
+                        }
                         return null;
                       },
                       keyboardType: TextInputType.phone,
@@ -373,6 +395,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           hintText: "Enter your password"),
                       onSaved: (value) => password = value!,
                       validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter a password";
+                        } else if (value.length < 8) {
+                          return "Password should not be less than 8 characters";
+                        }
                         return null;
                       },
                       keyboardType: TextInputType.text,
@@ -472,12 +499,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           value: null,
           onChanged: (String? value) {},
           items: items.map((String item) {
-                return DropdownMenuItem<String>(
-                  value: item,
-                  child: Text(item),
-                );
-              })?.toList() ??
-              [],
+            return DropdownMenuItem<String>(
+              value: item,
+              child: Text(item),
+            );
+          }).toList(),
         ),
       ],
     );

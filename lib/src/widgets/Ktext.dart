@@ -20,7 +20,7 @@ class KText extends StatelessWidget {
   TextOverflow? overflow;
   bool? isHeadTitle;
   Paint? foreground;
-  KText({
+  KText({super.key, 
     required this.text,
     this.color,
     this.fontSize,

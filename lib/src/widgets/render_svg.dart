@@ -9,8 +9,8 @@ class RenderSvg extends StatelessWidget {
   final double? width;
   final Color? color;
   final BoxFit? fit;
-  RenderSvg(
-      {required this.path, this.height, this.width, this.color, this.fit});
+  const RenderSvg(
+      {super.key, required this.path, this.height, this.width, this.color, this.fit});
 
   @override
   Widget build(BuildContext context) {

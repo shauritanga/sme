@@ -11,6 +11,11 @@ class Dashboard {
     required this.expenses,
     required this.stock,
   }) : total = expenses + purchases + sales;
+
+  @override
+  String toString() {
+    return "{'sales':$sales, 'purchases':$purchases, 'expenses':$expenses, 'stock':$stock, 'total':$total}";
+  }
 }
 
 final data = Dashboard(

@@ -59,6 +59,15 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       ),
                       onSaved: (value) => email = value!,
                       validator: (value) {
+                        String pattern =
+                            r'^[a-z]+([a-z0-9.-]+)?\@[a-z]+\.[a-z]{2,3}$';
+                        RegExp regExp = RegExp(pattern);
+                        if (value!.isEmpty) {
+                          return "Email is required";
+                        }
+                        if (!regExp.hasMatch(value)) {
+                          return "Please enter a valid email";
+                        }
                         return null;
                       },
                       keyboardType: TextInputType.emailAddress,
@@ -91,6 +100,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       ),
                       onSaved: (value) => password = value!,
                       validator: (value) {
+                        String pattern = r'[A-Za-z]+[0-9]+[.!@#$%*&+~]+';
+                        RegExp regExp = RegExp(pattern);
+                        // if (!regExp.hasMatch(value!)) {
+                        //   return "Password should contains atleast a letter, number and special characters";
+                        // } else
+                        if (value!.isEmpty) {
+                          return "Please enter a password";
+                        } else if (value.length < 8) {
+                          return "Password should not be less than 8 characters";
+                        }
                         return null;
                       },
                       obscureText: hidePassword,
@@ -131,7 +150,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     // ignore: use_build_context_synchronously
                     Navigator.pushReplacementNamed(context, '/');
                   } else {
-                    print("Sign-in failed");
                     // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(

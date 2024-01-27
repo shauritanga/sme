@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sme/src/widgets/graph_card.dart';
+import 'package:sme/src/screens/expense_statistics.dart';
+import 'package:sme/src/screens/purchase_statistics.dart';
+import 'package:sme/src/screens/sale_statistics.dart';
 
 class StatisticsScreen extends StatelessWidget {
   const StatisticsScreen({super.key});
@@ -29,8 +31,8 @@ class StatisticsScreen extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           children: [
             SalesStatistics(),
-            Center(child: Text("under construction")),
-            Center(child: Text("under construction")),
+            PurchasesStatistics(),
+            ExpensesStatistics(),
           ],
         ),
       ),

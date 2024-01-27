@@ -8,16 +8,17 @@ import 'package:sme/src/widgets/hex_color.dart';
 import 'package:sme/src/yearly.dart';
 import 'package:sme/trial.dart';
 
-class SalesStatistics extends ConsumerStatefulWidget {
-  const SalesStatistics({
+class PurchasesStatistics extends ConsumerStatefulWidget {
+  const PurchasesStatistics({
     super.key,
   });
 
   @override
-  ConsumerState<SalesStatistics> createState() => _SalesStatisticsState();
+  ConsumerState<PurchasesStatistics> createState() =>
+      _PurchasesStatisticsState();
 }
 
-class _SalesStatisticsState extends ConsumerState<SalesStatistics> {
+class _PurchasesStatisticsState extends ConsumerState<PurchasesStatistics> {
   int _currentSelectIndex = 0;
 
   Widget weekBottomTitleWidgets(double value, TitleMeta meta) {
@@ -289,7 +290,7 @@ class _SalesStatisticsState extends ConsumerState<SalesStatistics> {
                     return Column(
                       children: [
                         const Text(
-                          "This Week Sales",
+                          "This Week Purchases",
                           style: TextStyle(
                             color: Colors.grey,
                           ),
@@ -316,7 +317,7 @@ class _SalesStatisticsState extends ConsumerState<SalesStatistics> {
                           ],
                         ),
                         const SizedBox(height: 20),
-                        Container(
+                        SizedBox(
                           height: 200,
                           child: LineChart(
                             LineChartData(
@@ -400,7 +401,7 @@ class _SalesStatisticsState extends ConsumerState<SalesStatistics> {
                     return Column(
                       children: [
                         const Text(
-                          "This Month Sales",
+                          "This Month Purchases",
                           style: TextStyle(
                             color: Colors.grey,
                           ),
@@ -427,7 +428,7 @@ class _SalesStatisticsState extends ConsumerState<SalesStatistics> {
                           ],
                         ),
                         const SizedBox(height: 20),
-                        Container(
+                        SizedBox(
                           height: 200,
                           child: LineChart(
                             LineChartData(
@@ -508,7 +509,7 @@ class _SalesStatisticsState extends ConsumerState<SalesStatistics> {
                     return Column(
                       children: [
                         const Text(
-                          "This Year Sales",
+                          "This Year Purchases",
                           style: TextStyle(
                             color: Colors.grey,
                           ),
@@ -535,7 +536,7 @@ class _SalesStatisticsState extends ConsumerState<SalesStatistics> {
                           ],
                         ),
                         const SizedBox(height: 20),
-                        Container(
+                        SizedBox(
                           height: 200,
                           child: LineChart(
                             LineChartData(
@@ -616,7 +617,7 @@ class _SalesStatisticsState extends ConsumerState<SalesStatistics> {
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Text(
-            "Today's sales",
+            "Today's purchases",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,

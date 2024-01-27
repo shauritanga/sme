@@ -7,8 +7,8 @@ class RenderImg extends StatelessWidget {
   final double? width;
   final Color? color;
   final BoxFit? fit;
-  RenderImg(
-      {required this.path, this.fit, this.height, this.width, this.color});
+  const RenderImg(
+      {super.key, required this.path, this.fit, this.height, this.width, this.color});
 
   @override
   Widget build(BuildContext context) {

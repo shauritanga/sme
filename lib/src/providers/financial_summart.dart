@@ -12,14 +12,21 @@ final financialSummaryStreamProvider =
   final salesStream = firestore
       .collection('sales')
       .where("userId", isEqualTo: user?.uid)
+      .where("timestamp", isGreaterThanOrEqualTo: _startOfToday())
+      .where("timestamp", isLessThan: _startOfTomorrow())
       .snapshots();
   final purchasesStream = firestore
       .collection('purchases')
       .where("userId", isEqualTo: user?.uid)
+      .where("timestamp", isGreaterThanOrEqualTo: _startOfToday())
+      .where("timestamp", isLessThan: _startOfTomorrow())
       .snapshots();
+
   final expensesStream = firestore
       .collection('expenses')
       .where("userId", isEqualTo: user?.uid)
+      .where("timestamp", isGreaterThanOrEqualTo: _startOfToday())
+      .where("timestamp", isLessThan: _startOfTomorrow())
       .snapshots();
 
   final combinedStream =
@@ -30,12 +37,17 @@ final financialSummaryStreamProvider =
     final totalSales = _calculateTotalAmount(snapshots[0]);
     final totalPurchases = _calculateTotalAmount(snapshots[1]);
     final totalExpenses = _calculateTotalAmount(snapshots[2]);
+    print(totalSales);
 
-    return Dashboard(
+    final dashboard = Dashboard(
         sales: totalSales,
         purchases: totalPurchases,
         expenses: totalExpenses,
         stock: 657);
+
+    print(dashboard.toString());
+
+    return dashboard;
   });
 });
 
@@ -43,4 +55,16 @@ double _calculateTotalAmount(QuerySnapshot<Object?> snapshot) {
   return snapshot.docs
       .map((doc) => doc['cost'] != null ? (doc['cost'] as num).toDouble() : 0.0)
       .fold(0.0, (acc, amount) => acc + amount);
+}
+
+DateTime _startOfToday() {
+  DateTime now = DateTime.now();
+
+  return DateTime(now.year, now.month, now.day, 0, 0, 0, 0);
+}
+
+// Helper method to get the start of tomorrow
+DateTime _startOfTomorrow() {
+  DateTime now = DateTime.now();
+  return DateTime(now.year, now.month, now.day + 1, 0, 0, 0, 0);
 }
