@@ -16,7 +16,7 @@ class PurchaseScreen extends ConsumerWidget {
         title: const Text("Purchases"),
       ),
       body: FutureBuilder(
-        future: purchases.getPurchasess(),
+        future: purchases.getPurchases(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();

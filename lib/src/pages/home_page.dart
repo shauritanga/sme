@@ -73,21 +73,23 @@ class _HomePageState extends ConsumerState<HomePage> {
                           sections: [
                             PieChartSectionData(
                               title:
-                                  "${((data.purchases / data.total) * 100)}%",
+                                  "${((data.purchases / data.total) * 100).toStringAsFixed(0)}%",
                               value: data.purchases,
                               radius: 50,
                               color: HexColor("#102d61").withAlpha(180),
                               titleStyle: const TextStyle(color: Colors.white),
                             ),
                             PieChartSectionData(
-                              title: "${((data.sales / data.total) * 100)}%",
+                              title:
+                                  "${((data.sales / data.total) * 100).toStringAsFixed(0)}%",
                               value: data.sales,
                               radius: 50,
                               color: HexColor("#102d61"),
                               titleStyle: const TextStyle(color: Colors.white),
                             ),
                             PieChartSectionData(
-                              title: "${((data.expenses / data.total) * 100)}%",
+                              title:
+                                  "${((data.expenses / data.total) * 100).toStringAsFixed(0)}%",
                               value: data.expenses,
                               radius: 50,
                               color: HexColor("#f6c347"),

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sme/src/providers/auth.dart';
+import 'package:sme/src/screens/setting.dart';
 import 'package:sme/src/widgets/hex_color.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -13,6 +15,13 @@ class ProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  Future<void> _launchUrl(String phone) async {
+    Uri uri = Uri(path: phone, scheme: "tel");
+    if (!await launchUrl(uri)) {
+      throw Exception("Could not launch $phone");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final auth = ref.watch(authService);
@@ -113,7 +122,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ListTile(
                     leading: const Icon(EvaIcons.settingsOutline),
                     title: const Text("Settings"),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const SettingScreen()));
+                    },
                   ),
                   ListTile(
                     leading: const Icon(EvaIcons.lockOutline),
@@ -128,7 +142,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ListTile(
                     leading: const Icon(EvaIcons.questionMarkCircleOutline),
                     title: const Text("Help & Support"),
-                    onTap: () {},
+                    onTap: () {
+                      _launchUrl("+255655591660");
+                    },
                   ),
                   ListTile(
                     leading: const Icon(EvaIcons.powerOutline),
@@ -136,8 +152,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     onTap: () async {
                       final auth = ref.read(authService);
                       await auth.signOut();
-
-                      // Navigate back to the sign-in screen
                       // ignore: use_build_context_synchronously
                       Navigator.of(context, rootNavigator: true)
                           .pushReplacementNamed('/');

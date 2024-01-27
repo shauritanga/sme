@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-final dailySalesSummaryProvider = FutureProvider.autoDispose((ref) async {
+final dailyExpensesSummaryProvider = FutureProvider.autoDispose((ref) async {
   final CollectionReference salesCollection =
-      FirebaseFirestore.instance.collection('sales');
+      FirebaseFirestore.instance.collection('expenses');
 
   final now = DateTime.now();
   final startOfWeek = DateTime(now.year, now.month, now.day - now.weekday);

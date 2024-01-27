@@ -2,11 +2,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-import 'package:sme/src/monthly.dart';
+import 'package:sme/src/providers/monthly_sale.dart';
 import 'package:sme/src/providers/sales.dart';
 import 'package:sme/src/widgets/hex_color.dart';
-import 'package:sme/src/yearly.dart';
-import 'package:sme/trial.dart';
+import 'package:sme/src/providers/yearly_sale.dart';
+import 'package:sme/src/providers/daily_sale.dart';
 
 class SalesStatistics extends ConsumerStatefulWidget {
   const SalesStatistics({
@@ -155,7 +155,7 @@ class _SalesStatisticsState extends ConsumerState<SalesStatistics> {
   @override
   Widget build(BuildContext context) {
     final sale = ref.watch(salesProvider);
-    final weekylSalesAsync = ref.watch(dailySummaryProvider);
+    final weekylSalesAsync = ref.watch(dailySalesSummaryProvider);
     final montlySaleAsync = ref.watch(salePerWeekProvider);
     final yearlyAsync = ref.watch(yearlySaleProvider);
     return ListView(

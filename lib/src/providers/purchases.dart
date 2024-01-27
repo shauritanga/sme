@@ -24,7 +24,7 @@ class Purchases {
     return false;
   }
 
-  Future<List<Map<String, dynamic>>> getPurchasess() async {
+  Future<List<Map<String, dynamic>>> getPurchases() async {
     final querySnapshot = await _salesCollection
         .where("userId", isEqualTo: user?.uid)
         .where("timestamp", isGreaterThanOrEqualTo: _startOfToday())

@@ -2,11 +2,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-import 'package:sme/src/monthly.dart';
-import 'package:sme/src/providers/sales.dart';
+import 'package:sme/src/providers/daily_purchase.dart';
+import 'package:sme/src/providers/monthly_purchase.dart';
+import 'package:sme/src/providers/purchases.dart';
+import 'package:sme/src/providers/yearly_purchase.dart';
 import 'package:sme/src/widgets/hex_color.dart';
-import 'package:sme/src/yearly.dart';
-import 'package:sme/trial.dart';
 
 class PurchasesStatistics extends ConsumerStatefulWidget {
   const PurchasesStatistics({
@@ -155,10 +155,10 @@ class _PurchasesStatisticsState extends ConsumerState<PurchasesStatistics> {
 
   @override
   Widget build(BuildContext context) {
-    final sale = ref.watch(salesProvider);
-    final weekylSalesAsync = ref.watch(dailySummaryProvider);
-    final montlySaleAsync = ref.watch(salePerWeekProvider);
-    final yearlyAsync = ref.watch(yearlySaleProvider);
+    final purchase = ref.watch(purchasesProvider);
+    final weekylSalesAsync = ref.watch(dailyPurchasesSummaryProvider);
+    final montlySaleAsync = ref.watch(purchasesPerWeekProvider);
+    final yearlyAsync = ref.watch(yearlyPurchaseProvider);
     return ListView(
       children: [
         Container(
@@ -436,7 +436,7 @@ class _PurchasesStatisticsState extends ConsumerState<PurchasesStatistics> {
                               minX: 0,
                               maxX: 3,
                               minY: 0,
-                              maxY: 100000,
+                              maxY: 5000000,
                               lineBarsData: [
                                 LineChartBarData(
                                   spots: [
@@ -544,7 +544,7 @@ class _PurchasesStatisticsState extends ConsumerState<PurchasesStatistics> {
                               minX: 0,
                               maxX: 11,
                               minY: 0,
-                              maxY: 5000000,
+                              maxY: 10000000,
                               lineBarsData: [
                                 LineChartBarData(
                                   spots: [
@@ -626,7 +626,7 @@ class _PurchasesStatisticsState extends ConsumerState<PurchasesStatistics> {
         ),
         const SizedBox(height: 12),
         FutureBuilder(
-          future: sale.getSales(),
+          future: purchase.getPurchases(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const SizedBox(
@@ -640,13 +640,13 @@ class _PurchasesStatisticsState extends ConsumerState<PurchasesStatistics> {
                 child: Text("${snapshot.error}"),
               );
             } else if (snapshot.hasData) {
-              final todaySales = snapshot.data ?? [];
+              final todayPurchases = snapshot.data ?? [];
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ListView.builder(
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    final item = todaySales[index];
+                    final item = todayPurchases[index];
                     return Container(
                       margin: const EdgeInsets.only(bottom: 8),
                       padding: const EdgeInsets.all(8),
@@ -694,7 +694,7 @@ class _PurchasesStatisticsState extends ConsumerState<PurchasesStatistics> {
                       ),
                     );
                   },
-                  itemCount: todaySales.length,
+                  itemCount: todayPurchases.length,
                   physics: const NeverScrollableScrollPhysics(),
                 ),
               );
