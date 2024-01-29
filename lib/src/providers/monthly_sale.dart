@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 final salePerWeekProvider = FutureProvider((ref) async {
+  User? user = FirebaseAuth.instance.currentUser;
   final CollectionReference salesCollection =
       FirebaseFirestore.instance.collection('sales');
   final now = DateTime.now();
@@ -10,6 +12,7 @@ final salePerWeekProvider = FutureProvider((ref) async {
   final endOfMonth =
       DateTime(now.year, now.month + 1, 1).subtract(const Duration(days: 1));
   final querySnapshot = await salesCollection
+      .where("userId", isEqualTo: user?.uid)
       .where('timestamp', isGreaterThanOrEqualTo: startOfMonth)
       .where('timestamp', isLessThan: endOfMonth)
       .get();

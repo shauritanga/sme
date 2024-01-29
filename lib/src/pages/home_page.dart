@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sme/src/providers/auth.dart';
 import 'package:sme/src/providers/financial_summart.dart';
 import 'package:sme/src/screens/expenses_screen.dart';
 import 'package:sme/src/screens/purchase_screen.dart';
@@ -21,6 +22,8 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final auth = ref.watch(authService);
+    final currentUser = auth.currentUser;
     final asyncValue =
         ref.watch(financialSummaryStreamProvider.select((value) => value));
     return asyncValue.when(
@@ -36,24 +39,36 @@ class _HomePageState extends ConsumerState<HomePage> {
       )),
       data: (data) => Scaffold(
         appBar: AppBar(
-          title: const Text("Overview"),
+          title: Text("Welcome, ${currentUser!.displayName!.split(" ")[0]}!"),
           centerTitle: false,
-          actions: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              decoration: BoxDecoration(
-                  color: HexColor("#d9e3f8"),
-                  borderRadius: BorderRadius.circular(5)),
-              child: Text(DateFormat.yMMMMd().format(DateTime.now())),
-            ),
-          ],
         ),
         backgroundColor: HexColor("#fdfdfd"),
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Todays' Summary",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 4),
+                      decoration: BoxDecoration(
+                          color: HexColor("#d9e3f8"),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(DateFormat.yMMMMd().format(DateTime.now())),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 height: 250,

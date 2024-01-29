@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 final dailyExpensesSummaryProvider = FutureProvider.autoDispose((ref) async {
+  User? user = FirebaseAuth.instance.currentUser;
   final CollectionReference salesCollection =
       FirebaseFirestore.instance.collection('expenses');
 
@@ -10,6 +12,7 @@ final dailyExpensesSummaryProvider = FutureProvider.autoDispose((ref) async {
   final startOfWeek = DateTime(now.year, now.month, now.day - now.weekday);
   final endOfWeek = startOfWeek.add(const Duration(days: 7));
   final querySnapshot = await salesCollection
+      .where("userId", isEqualTo: user?.uid)
       .where("timestamp", isGreaterThanOrEqualTo: startOfWeek)
       .where("timestamp", isLessThan: endOfWeek)
       .get();

@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final yearlyExpenseProvider = FutureProvider((ref) async {
+  User? user = FirebaseAuth.instance.currentUser;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   DateTime now = DateTime.now();
   QuerySnapshot querySnapshot = await firestore
       .collection('expenses')
+      .where("userId", isEqualTo: user?.uid)
       .where('timestamp', isGreaterThanOrEqualTo: DateTime(now.year, 1, 1))
       .where('timestamp', isLessThan: DateTime(now.year + 1, 1, 1))
       .get();

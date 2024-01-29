@@ -143,6 +143,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
                         List<QueryDocumentSnapshot> regions =
                             snapshot.data!.docs;
+
                         List<Map> mikoa = regions.map((mkoa) {
                           return {"id": mkoa.id, "name": mkoa.data() as Map};
                         }).toList();
