@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-final salePerWeekProvider = FutureProvider((ref) async {
+final salePerWeekProvider = FutureProvider.autoDispose((ref) async {
   User? user = FirebaseAuth.instance.currentUser;
   final CollectionReference salesCollection =
       FirebaseFirestore.instance.collection('sales');
@@ -69,7 +69,7 @@ Map<String, double> organizeSalesByWeek(List<QueryDocumentSnapshot> sales) {
   }
 
   // Ensure that weeks without sales have a total of zero
-// Ensure that weeks without sales have a total of zero
+  // Ensure that weeks without sales have a total of zero
   final allWeeksInMonth =
       List.generate(53, (index) => (index + 1).toString()).where((week) {
     final DateTime firstDayOfYear = DateTime.utc(DateTime.now().year, 1, 1);
@@ -84,7 +84,7 @@ Map<String, double> organizeSalesByWeek(List<QueryDocumentSnapshot> sales) {
     final DateTime firstDayOfGivenWeek = firstDayOfYear
         .add(Duration(days: daysToFirstWeek + (int.parse(week) - 1) * 7));
 
-//   Get the last date of the week
+    //   Get the last date of the week
     final DateTime lastDayOfGivenWeek =
         firstDayOfGivenWeek.add(const Duration(days: 6));
 

@@ -27,6 +27,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
+          
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,

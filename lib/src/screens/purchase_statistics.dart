@@ -397,7 +397,7 @@ class _PurchasesStatisticsState extends ConsumerState<PurchasesStatistics> {
                     final total = data.values
                         .toList()
                         .fold(0.0, (prev, ele) => prev + ele);
-
+                    final keys = data.keys.toList();
                     return Column(
                       children: [
                         const Text(
@@ -440,10 +440,10 @@ class _PurchasesStatisticsState extends ConsumerState<PurchasesStatistics> {
                               lineBarsData: [
                                 LineChartBarData(
                                   spots: [
-                                    FlSpot(0, data["1"]!),
-                                    FlSpot(1, data["2"]!),
-                                    FlSpot(2, data['3']!),
-                                    FlSpot(3, data["4"]!),
+                                    FlSpot(0, data[keys[0]]!),
+                                    FlSpot(1, data[keys[1]]!),
+                                    FlSpot(2, data[keys[2]]!),
+                                    FlSpot(3, data[keys[3]]!),
                                   ],
                                   isCurved: false,
                                   gradient: const LinearGradient(

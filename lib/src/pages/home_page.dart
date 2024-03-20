@@ -209,14 +209,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                       child: CustomCard(
                         value: Row(
                           children: [
-                            const Text(
-                              "TSH",
-                              style: TextStyle(
-                                fontSize: 9,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
-                            ),
                             const SizedBox(width: 4),
                             Text(
                               data.purchases.toStringAsFixed(2),

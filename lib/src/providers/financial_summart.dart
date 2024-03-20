@@ -37,15 +37,12 @@ final financialSummaryStreamProvider =
     final totalSales = _calculateTotalAmount(snapshots[0]);
     final totalPurchases = _calculateTotalAmount(snapshots[1]);
     final totalExpenses = _calculateTotalAmount(snapshots[2]);
-    print(totalSales);
 
     final dashboard = Dashboard(
         sales: totalSales,
         purchases: totalPurchases,
         expenses: totalExpenses,
         stock: 657);
-
-    print(dashboard.toString());
 
     return dashboard;
   });

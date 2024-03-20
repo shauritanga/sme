@@ -85,17 +85,18 @@ class _AddItemScreenState extends ConsumerState<AddItemScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: TextField(
-                  controller: _priceController,
-                  onChanged: (value) {
-                    if (value.isNotEmpty) {
-                      setState(() {});
-                    }
-                  },
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(7),
-                    ),
-                  )),
+                controller: _priceController,
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    setState(() {});
+                  }
+                },
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(7),
+                  ),
+                ),
+              ),
             ),
             const SizedBox(height: 16),
             const Padding(
@@ -132,6 +133,7 @@ class _AddItemScreenState extends ConsumerState<AddItemScreen> {
                       double.parse(_priceController.text),
                     );
                     if (response) {
+                      ref.invalidate(salesProvider);
                       // ignore: use_build_context_synchronously
                       Navigator.pop(context);
                     }
@@ -142,6 +144,7 @@ class _AddItemScreenState extends ConsumerState<AddItemScreen> {
                       double.parse(_priceController.text),
                     );
                     if (response) {
+                      ref.invalidate(purchasesProvider);
                       // ignore: use_build_context_synchronously
                       Navigator.pop(context);
                     }
@@ -152,6 +155,7 @@ class _AddItemScreenState extends ConsumerState<AddItemScreen> {
                       double.parse(_priceController.text),
                     );
                     if (response) {
+                      ref.invalidate(expensesProvider);
                       // ignore: use_build_context_synchronously
                       Navigator.pop(context);
                     }
